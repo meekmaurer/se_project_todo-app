@@ -1,6 +1,6 @@
 # Simple Todo App
 
-Give a brief description of the project here. Feel free to give it a different name.
+This is a project to help deveplop the understandof the OOP methodology. As well as implementing mudules. That where taught in the previous chapthers.
 
 ## Functionality
 
