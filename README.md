@@ -16,4 +16,4 @@ here are some examples of the modueles that where used to work on this project.
 
 This project is deployed on GitHub Pages:
 
-- ADD LINK HERE
+- [ADD LINK HERE](https://meekmaurer.github.io/se_project_todo-app/)
