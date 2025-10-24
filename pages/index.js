@@ -20,12 +20,10 @@ const generateTodo = (data) => {
 const section = new Section({
   items: initialTodos,
   renderer: (item) => {
-    initialTodos.forEach((item) => {
-      const todo = generateTodo(item);
-      section.addItems(todo);
-    });
+    const todo = generateTodo(item);
+    return todo;
   },
-  containerSelector: "todos__list",
+  containerSelector: ".todos__list",
 });
 section.renderItems();
 
