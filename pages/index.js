@@ -3,13 +3,20 @@ import { initialTodos, validationConfig } from "../utils/constants.js";
 import Todo from "../components/Todo.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForms.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
-const addTodoPopup = document.querySelector("#add-todo-popup");
-const addTodoForm = addTodoPopup.querySelector(".popup__form");
-const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
+const addTodoPopupElement = document.querySelector("#add-todo-popup");
+const addTodoForm = addTodoPopupElement.querySelector(".popup__form");
+const addTodoCloseBtn = addTodoPopupElement.querySelector(".popup__close");
 //const todoTemplate = document.querySelector("#todo-template");
 const todosList = document.querySelector(".todos__list");
+
+const addTodoPopup = new PopupWithForm({
+  popupSelector: "#add-todo-popup",
+  handelFormSelector: () => {},
+});
+addTodoPopup.setEventListeners();
 
 const generateTodo = (data) => {
   const todo = new Todo(data, "#todo-template");
@@ -27,24 +34,9 @@ const section = new Section({
 });
 section.renderItems();
 
-const openModal = (modal) => {
-  modal.classList.add("popup_visible");
-  // newTodoValidator._resetValidation();
-};
-
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-};
-
-// The logic in this function should all be handled in the Todo class.
-
 addTodoButton.addEventListener("click", () => {
-  openModal(addTodoPopup);
+  addTodoPopup.open();
   newTodoValidator.resetValidation();
-});
-
-addTodoCloseBtn.addEventListener("click", () => {
-  closeModal(addTodoPopup);
 });
 
 addTodoForm.addEventListener("submit", (evt) => {
@@ -55,13 +47,16 @@ addTodoForm.addEventListener("submit", (evt) => {
   // Create a date object and adjust for timezone
   const date = new Date(dateInput);
   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-  const values = { name, date, id, completed: false };
+
   const id = uuidv4();
 
+  const values = { name, date, id, completed: false };
   const todo = generateTodo(values);
   todosList.append(todo);
-  closeModal(addTodoPopup);
+
   newTodoValidator.resetValidation();
+
+  addTodoPopup.close();
 });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
