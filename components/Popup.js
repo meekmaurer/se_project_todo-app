@@ -5,8 +5,10 @@ class Popup {
   }
 
   _handleEscapeClose(evt) {
-    console.log("any key pressed");
     if (evt.key === "Escape") {
+      document.removeEventListener("keyup", (evt) =>
+        this._handleEscapeClose(evt)
+      );
       this.close();
     }
   }
@@ -18,9 +20,6 @@ class Popup {
 
   close() {
     this._popupElement.classList.remove("popup_visible");
-    document.removeEventListener("keyup", (evt) =>
-      this._handleEscapeClose(evt)
-    );
   }
 
   setEventListeners() {

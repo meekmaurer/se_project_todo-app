@@ -9,7 +9,7 @@ class FormValidator {
     this._errorClass = settings.errorClass;
   }
 
-  _showInputError = (formEl, errorMessage, inputElement, settings) => {
+  _showInputError = (inputElement, settings, errorMessage) => {
     const errorElementId = `#${inputElement.id}-error`;
     const errorElement = this._formEl.querySelector(errorElementId);
     inputElement.classList.add(settings.inputErrorClass);
@@ -17,7 +17,7 @@ class FormValidator {
     errorElement.classList.add(settings.errorClass);
   };
 
-  _hideInputError = (formEl, inputElement, settings) => {
+  _hideInputError = (inputElement, settings) => {
     const errorElementId = `#${inputElement.id}-error`;
     const errorElement = this._formEl.querySelector(errorElementId);
     inputElement.classList.remove(settings.inputErrorClass);
@@ -28,17 +28,16 @@ class FormValidator {
   _checkInputValidity = (inputElement) => {
     if (!inputElement.validity.valid) {
       this._showInputError(
-        this._formEl,
-        inputElement.validationMessage,
         inputElement,
-        this._settings
+        this._settings,
+        inputElement.validationMessage
       );
     } else {
-      this._hideInputError(this._formEl, inputElement, this._settings);
+      this._hideInputError(inputElement, this._settings);
     }
   };
 
-  _toggleButtonState = (inputList, buttonElement) => {
+  _toggleButtonState = (inputList) => {
     const hasInvalidInput = inputList.some(
       (inputElement) => !inputElement.validity.valid
     );
@@ -88,7 +87,7 @@ class FormValidator {
 
     this._inputList.forEach((inputElement) => {
       inputElement.value = "";
-      this._hideInputError(this._formEl, inputElement, this._settings);
+      this._hideInputError(inputElement, this._settings);
     });
 
     this._toggleButtonState(this._inputList, this._buttonElement);

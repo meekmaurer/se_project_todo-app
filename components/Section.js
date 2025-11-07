@@ -5,14 +5,14 @@ class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  renderItems() {
+  rendertodoEl() {
     this._items.forEach((item) => {
-      const Items = this._renderer(item);
-      this.addItems(Items);
+      const todoEl = this._renderer(item);
+      this.addtodoEl(todoEl);
     });
   }
 
-  addItems(element) {
+  addtodoEl(element) {
     this._container.append(element);
   }
 }
