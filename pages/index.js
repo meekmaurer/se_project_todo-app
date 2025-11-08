@@ -8,7 +8,7 @@ import TodoCounter from "../components/TodoCounter.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopupElement = document.querySelector("#add-todo-popup");
-const addTodoForm = addTodoPopupElement.querySelector(".popup__form");
+const addTodoForm = document.forms["add-todo-form"];
 
 const todosList = document.querySelector(".todos__list");
 const todoCounter = new TodoCounter(initialTodos, ".counter__text");
@@ -66,7 +66,6 @@ section.rendertodoEl();
 
 addTodoButton.addEventListener("click", () => {
   addTodoPopup.open();
-  newTodoValidator.resetValidation();
 });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
